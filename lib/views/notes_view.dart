@@ -15,8 +15,14 @@ class NotesView extends StatelessWidget {
               borderRadius: BorderRadius.circular(24),
             ),
             context: context,
+            isScrollControlled: true,
             builder: (context) {
-              return const AddNoteBottomSheet();
+              return Padding(
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                ),
+                child: const AddNoteBottomSheet(),
+              );
             },
           );
         },
@@ -25,6 +31,8 @@ class NotesView extends StatelessWidget {
         ),
       ),
       body: const NotesViewBody(),
+      resizeToAvoidBottomInset:
+          true, // Ensures that the keyboard doesn't cover the bottom sheet
     );
   }
 }
