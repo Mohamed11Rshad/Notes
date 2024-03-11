@@ -7,16 +7,19 @@ class CustomIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 42,
-      width: 42,
+      height: 45,
+      width: 45,
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.05),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Center(
-        child: Icon(
-          icon,
-          size: 28,
+        child: IconButton(
+          icon: Icon(
+            icon,
+            size: 30,
+          ),
+          onPressed: () {},
         ),
       ),
     );
