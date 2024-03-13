@@ -16,5 +16,5 @@ final class NotesLoading extends NotesState {}
 final class NotesFailure extends NotesState {
   final String error;
 
-  NotesFailure({required this.error});
+  NotesFailure(this.error);
 }
