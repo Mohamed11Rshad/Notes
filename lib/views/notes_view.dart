@@ -31,8 +31,6 @@ class NotesView extends StatelessWidget {
         ),
       ),
       body: const NotesViewBody(),
-      resizeToAvoidBottomInset:
-          true, // Ensures that the keyboard doesn't cover the bottom sheet
     );
   }
 }
