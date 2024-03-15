@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:notes/cubits/add%20note%20cubit/add_note_cubit.dart';
 import 'package:notes/models/note_model.dart';
+import 'package:notes/views/widgets/color_item.dart';
+import 'package:notes/views/widgets/colors_list_view.dart';
 import 'package:notes/views/widgets/custom_button.dart';
 import 'package:notes/views/widgets/custom_text_field.dart';
 
@@ -48,7 +50,11 @@ class _AddNoteFormState extends State<AddNoteForm> {
             maxLines: 5,
           ),
           const SizedBox(
-            height: 32,
+            height: 24,
+          ),
+          ColorsListView(),
+          const SizedBox(
+            height: 24,
           ),
           BlocBuilder<AddNoteCubit, AddNoteState>(
             builder: (context, state) {
@@ -56,17 +62,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
                 isLoading: state is AddNoteLoading ? true : false,
                 onTap: () {
                   if (formKey.currentState!.validate()) {
-                    formKey.currentState!.save();
-                    var currentDate = DateTime.now();
-                    var formattedCurrentDate =
-                        DateFormat('d MMM, yyyy').format(currentDate);
-                    NoteModel note = NoteModel(
-                      title: title!,
-                      content: content!,
-                      date: formattedCurrentDate,
-                      color: const Color(0xffFFCC80).value,
-                    );
-                    BlocProvider.of<AddNoteCubit>(context).addNote(note);
+                    addNote(context);
                   } else {
                     autovalidateMode = AutovalidateMode.always;
                     setState(() {});
@@ -81,5 +77,18 @@ class _AddNoteFormState extends State<AddNoteForm> {
         ],
       ),
     );
+  }
+
+  void addNote(BuildContext context) {
+    formKey.currentState!.save();
+    var currentDate = DateTime.now();
+    var formattedCurrentDate = DateFormat('d MMM, yyyy').format(currentDate);
+    NoteModel note = NoteModel(
+      title: title!,
+      content: content!,
+      date: formattedCurrentDate,
+      color: const Color(0xffFFCC80).value,
+    );
+    BlocProvider.of<AddNoteCubit>(context).addNote(note);
   }
 }
