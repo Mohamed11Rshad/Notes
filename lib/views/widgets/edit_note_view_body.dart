@@ -4,6 +4,7 @@ import 'package:notes/cubits/notes/notes_cubit.dart';
 import 'package:notes/models/note_model.dart';
 import 'package:notes/views/widgets/custom_text_field.dart';
 import 'package:notes/views/widgets/custtom_app_bar.dart';
+import 'package:notes/views/widgets/edit_note_colors_list.dart';
 
 class EditNoteViewBody extends StatefulWidget {
   const EditNoteViewBody({super.key, required this.note});
@@ -15,6 +16,7 @@ class EditNoteViewBody extends StatefulWidget {
 
 class _EditNoteViewBodyState extends State<EditNoteViewBody> {
   String? title, content;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -37,24 +39,36 @@ class _EditNoteViewBodyState extends State<EditNoteViewBody> {
               Navigator.pop(context);
             },
           ),
-          const SizedBox(
-            height: 30,
-          ),
-          CustomTextField(
-            onChanged: (value) {
-              title = value;
-            },
-            hintText: widget.note.title,
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          CustomTextField(
-            onChanged: (value) {
-              content = value;
-            },
-            hintText: widget.note.content,
-            maxLines: 7,
+          Expanded(
+            child: ListView(
+              children: [
+                CustomTextField(
+                  onChanged: (value) {
+                    title = value;
+                  },
+                  hintText: widget.note.title,
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                CustomTextField(
+                  onChanged: (value) {
+                    content = value;
+                  },
+                  hintText: widget.note.content,
+                  maxLines: 7,
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                EditNoteColorsList(
+                  note: widget.note,
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+              ],
+            ),
           ),
         ],
       ),

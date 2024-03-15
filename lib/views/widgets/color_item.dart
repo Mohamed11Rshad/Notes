@@ -18,7 +18,7 @@ class ColorItem extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 24,
-            backgroundColor: isSelected ? color.withAlpha(400) : color,
+            backgroundColor: color,
           ),
           if (isSelected)
             const Positioned(
